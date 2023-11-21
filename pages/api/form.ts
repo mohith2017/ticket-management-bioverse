@@ -1,0 +1,115 @@
+
+import { NextApiRequest, NextApiResponse } from "next";
+// Import the functions you need from the SDKs you need
+// import { initializeApp } from "firebase/app";
+// import { getAnalytics } from "firebase/analytics";
+
+const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
+const { getFirestore, Timestamp, FieldValue, Filter } = require('firebase-admin/firestore');
+
+
+
+interface Data {
+    name: string;
+    email: string;
+    desc: string;
+    token: string;
+}
+
+
+export default async function ContactApi(
+    req: NextApiRequest,
+    res: NextApiResponse,
+) {
+    console.log("Came here");
+    const { name, email, desc, token }: Data = req.body;
+
+    // console.log(name);
+
+    const human = await validateHuman(token);
+    if (!human) {
+        res.status(400);
+        res.json({ errors: ["Haha, caught you! ;)"] });
+        return;
+    }
+    
+    try {
+
+        const firebaseConfig = {
+        apiKey: process.env.FIREBASE_API_KEY,
+        authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+        projectId: process.env.FIREBASE_PROJECT_ID,
+        storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+        messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+        appId: process.env.FIREBASE_APP_ID,
+        measurementId: process.env.FIREBASE_MEASUREMENT_ID
+      };
+    
+    //   const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
+    //   const { getFirestore, Timestamp, FieldValue, Filter } = require('firebase-admin/firestore');
+
+    //   // Initialize Firebase
+    // //   const app = initializeApp(firebaseConfig);
+    // //   const analytics = getAnalytics(app);
+
+    //   const app = initializeApp(firebaseConfig);
+
+    const app = initializeApp({
+        credential: applicationDefault(),
+        databaseURL: 'https://ticket-data.firebaseio.com'
+    });
+      
+      const db = getFirestore(app);
+      console.log(db);
+
+      const docRef = db.collection('ticket-data').doc(email);
+
+
+      var issueRef = "0";
+      const fetch = await docRef.get();
+      if(!fetch.exists){
+        await docRef.set({
+            name: name,
+            issueRef: 1 });
+        issueRef = "1";
+      }
+      else{
+        issueRef = fetch.data().issueRef;
+        issueRef = (+issueRef + 1).toString();
+      }
+
+
+      console.log(issueRef);
+      const newRef = db.collection('ticket-data').doc(email).collection('tickets').doc(issueRef);
+
+      await newRef.set({
+        desc: desc
+      });
+
+      
+        // const snapshot = await db.collection('ticket-data').doc(email).get();
+        // console.log(email, '=>', snapshot.data());
+            
+        res.status(200).json({ message: "success" });
+    } catch (err) {
+        res.status(500).json({ message: "an error occured" });
+        console.log(err);
+    }
+
+    
+
+}
+
+async function validateHuman(
+    token: string
+) {
+    const secret = process.env.RECAPTCHA_SECRET_KEY;
+    const response = await fetch(
+        `https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${token}`,
+        {
+            method: "POST",
+        }
+    );
+    const data = await response.json();
+    return data.success;
+}

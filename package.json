@@ -1,0 +1,43 @@
+{
+  "name": "bioverse-ticket-management",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "prod_start": "NODE_ENV=production node server.js"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^3.1.1",
+    "@next/font": "^13.1.1",
+    "@types/node": "^20.4.4",
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "axios": "^1.2.1",
+    "dotenv": "^16.0.3",
+    "eslint": "^8.45.0",
+    "eslint-config-next": "^13.1.1",
+    "express-handlebars": "^7.1.0",
+    "firebase": "^10.6.0",
+    "firebase-admin": "^11.11.0",
+    "next": "^13.1.1",
+    "nodemailer": "^6.8.0",
+    "nodemailer-express-handlebars": "^6.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-google-recaptcha": "^3.1.0",
+    "react-hook-form": "^7.41.1",
+    "react-icons": "^4.7.1",
+    "typescript": "^5.1.6",
+    "zod": "^3.20.2"
+  },
+  "devDependencies": {
+    "@types/nodemailer": "^6.4.7",
+    "@types/react-google-recaptcha": "^2.1.5",
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.20",
+    "tailwindcss": "^3.2.4"
+  }
+}
