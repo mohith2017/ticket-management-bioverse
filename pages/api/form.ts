@@ -6,6 +6,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
 const { getFirestore, Timestamp, FieldValue, Filter } = require('firebase-admin/firestore');
+import firebase from 'firebase-admin';
 
 
 
@@ -52,35 +53,44 @@ export default async function ContactApi(
     // //   const app = initializeApp(firebaseConfig);
     // //   const analytics = getAnalytics(app);
 
-    //   const app = initializeApp(firebaseConfig);
+    // const app = initializeApp(firebaseConfig);
 
-    const app = initializeApp({
-        credential: applicationDefault(),
-        databaseURL: 'https://ticket-data.firebaseio.com'
-    });
+    
+
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig); 
+     }
+     else{
+       firebase.app();
+     }
+     
+    
       
-      const db = getFirestore(app);
+      const db = getFirestore();
       console.log(db);
 
       const docRef = db.collection('ticket-data').doc(email);
 
 
-      var issueRef = "0";
+      var issueRef_fetch = "0";
       const fetch = await docRef.get();
       if(!fetch.exists){
         await docRef.set({
             name: name,
             issueRef: 1 });
-        issueRef = "1";
+         issueRef_fetch = "1";
       }
       else{
-        issueRef = fetch.data().issueRef;
-        issueRef = (+issueRef + 1).toString();
+        issueRef_fetch = fetch.data().issueRef;
+        console.log(issueRef_fetch)
+        issueRef_fetch = (+issueRef_fetch + 1).toString();
+        console.log(issueRef_fetch)
+        docRef.update({issueRef: issueRef_fetch});
       }
 
 
-      console.log(issueRef);
-      const newRef = db.collection('ticket-data').doc(email).collection('tickets').doc(issueRef);
+    //   console.log(issueRef);
+      const newRef = db.collection('ticket-data').doc(email).collection('tickets').doc(issueRef_fetch);
 
       await newRef.set({
         desc: desc
