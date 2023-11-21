@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": "18.x"
+    "node": "20.4.0"
   },
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
-    "start": "next start && node server.js",
+    "start": "node server.js",
     "lint": "next lint",
     "prod_start": "NODE_ENV=production node server.js"
   },
