@@ -3,13 +3,14 @@
     "builds": [
         {
             "src": "/server.js",
-            "use": "@now/node"
+            "use": "@now/node",
+            "config": { "includeFiles": ["src/**", "pages/**"] }
         }
     ],
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "/"
+            "dest": "/index.js"
         }
     ]
 }
