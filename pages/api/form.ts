@@ -64,15 +64,15 @@ export default async function ContactApi(
 
 
       var issueRef_fetch = "0";
-      // const fetch = ;
-      if(!await docRef.get().exists){
+      const fetch = await docRef.get();
+      if(!fetch.exists){
         await docRef.set({
             name: name,
             issueRef: 1 });
          issueRef_fetch = "1";
       }
       else{
-        issueRef_fetch = await docRef.get().data().issueRef;
+        issueRef_fetch = fetch.data().issueRef;
         console.log(issueRef_fetch)
         issueRef_fetch = (+issueRef_fetch + 1).toString();
         console.log(issueRef_fetch)
