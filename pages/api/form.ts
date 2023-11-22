@@ -4,9 +4,9 @@ import { NextApiRequest, NextApiResponse } from "next";
 // import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
 
-const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
-const { getFirestore, Timestamp, FieldValue, Filter } = require('firebase-admin/firestore');
-import firebase from 'firebase-admin';
+// const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
+// const { getFirestore, Timestamp, FieldValue, Filter } = require('firebase-admin/firestore');
+// import firebase from 'firebase-admin';
 
 
 
@@ -22,7 +22,7 @@ export default async function ContactApi(
     req: NextApiRequest,
     res: NextApiResponse,
 ) {
-    console.log("Came here");
+   
     const { name, email, desc }: Data = req.body;
 
     // console.log(name);
@@ -45,56 +45,47 @@ export default async function ContactApi(
         appId: process.env.FIREBASE_APP_ID,
         measurementId: process.env.FIREBASE_MEASUREMENT_ID
       };
-    
-    //   const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
-    //   const { getFirestore, Timestamp, FieldValue, Filter } = require('firebase-admin/firestore');
-
-    //   // Initialize Firebase
-    // //   const app = initializeApp(firebaseConfig);
-    // //   const analytics = getAnalytics(app);
-
-    // const app = initializeApp(firebaseConfig);
+  
 
     
 
-    if (!firebase.apps.length) {
-        firebase.initializeApp(firebaseConfig); 
-     }
-     else{
-       firebase.app();
-     }
-     
+    // if (!firebase.apps.length) {
+    //     firebase.initializeApp(firebaseConfig); 
+    //  }
+    //  else{
+    //    firebase.app();
+    //  }
     
       
-      const db = getFirestore();
-      console.log(db);
+    //   const db = getFirestore();
+    //   console.log(db);
 
-      const docRef = db.collection('ticket-data').doc(email);
-
-
-      var issueRef_fetch = "0";
-      const fetch = await docRef.get();
-      if(!fetch.exists){
-        await docRef.set({
-            name: name,
-            issueRef: 1 });
-         issueRef_fetch = "1";
-      }
-      else{
-        issueRef_fetch = fetch.data().issueRef;
-        console.log(issueRef_fetch)
-        issueRef_fetch = (+issueRef_fetch + 1).toString();
-        console.log(issueRef_fetch)
-        docRef.update({issueRef: issueRef_fetch});
-      }
+    //   const docRef = db.collection('ticket-data').doc(email);
 
 
-    //   console.log(issueRef);
-      const newRef = db.collection('ticket-data').doc(email).collection('tickets').doc(issueRef_fetch);
+    //   var issueRef_fetch = "0";
+    //   const fetch = await docRef.get();
+    //   if(!fetch.exists){
+    //     await docRef.set({
+    //         name: name,
+    //         issueRef: 1 });
+    //      issueRef_fetch = "1";
+    //   }
+    //   else{
+    //     issueRef_fetch = fetch.data().issueRef;
+    //     console.log(issueRef_fetch)
+    //     issueRef_fetch = (+issueRef_fetch + 1).toString();
+    //     console.log(issueRef_fetch)
+    //     docRef.update({issueRef: issueRef_fetch});
+    //   }
 
-      await newRef.set({
-        desc: desc
-      });
+
+    // //   console.log(issueRef);
+    //   const newRef = db.collection('ticket-data').doc(email).collection('tickets').doc(issueRef_fetch);
+
+    //   await newRef.set({
+    //     desc: desc
+    //   });
 
       
         // const snapshot = await db.collection('ticket-data').doc(email).get();
