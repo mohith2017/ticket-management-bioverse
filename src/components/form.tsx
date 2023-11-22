@@ -23,7 +23,7 @@ type FormData = z.infer<typeof formSchema>;
 export default function Form() {
   const [result, setResult] = useState<string>();
   const [resultColor, setResultColor] = useState<string>();
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  // const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const {
     register,
@@ -35,10 +35,10 @@ export default function Form() {
   });
 
   const processForm = async (data: FormData) => {
-    const token = await recaptchaRef?.current?.executeAsync();
-    recaptchaRef?.current?.reset();
+    // const token = await recaptchaRef?.current?.executeAsync();
+    // recaptchaRef?.current?.reset();
     // @ts-ignore-next-line
-    data["token"] = token || "";
+    // data["token"] = token || "";
     const config = {
       method: "post",
       url: "/api/form",
@@ -126,7 +126,7 @@ export default function Form() {
           </div>
         )}
       </div>
-
+{/* 
       <div>
         <ReCAPTCHA
           sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
@@ -134,7 +134,7 @@ export default function Form() {
           ref={recaptchaRef}
           hl="en"
         />
-      </div>
+      </div> */}
 
       <div className="flex gap-10 items-center justify-between">
         <button

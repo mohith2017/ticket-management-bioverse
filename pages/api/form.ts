@@ -14,7 +14,7 @@ interface Data {
     name: string;
     email: string;
     desc: string;
-    token: string;
+    // token: string;
 }
 
 
@@ -23,16 +23,16 @@ export default async function ContactApi(
     res: NextApiResponse,
 ) {
     console.log("Came here");
-    const { name, email, desc, token }: Data = req.body;
+    const { name, email, desc }: Data = req.body;
 
     // console.log(name);
 
-    const human = await validateHuman(token);
-    if (!human) {
-        res.status(400);
-        res.json({ errors: ["Haha, caught you! ;)"] });
-        return;
-    }
+    // const human = await validateHuman(token);
+    // if (!human) {
+    //     res.status(400);
+    //     res.json({ errors: ["Haha, caught you! ;)"] });
+    //     return;
+    // }
     
     try {
 
@@ -110,16 +110,16 @@ export default async function ContactApi(
 
 }
 
-async function validateHuman(
-    token: string
-) {
-    const secret = process.env.RECAPTCHA_SECRET_KEY;
-    const response = await fetch(
-        `https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${token}`,
-        {
-            method: "POST",
-        }
-    );
-    const data = await response.json();
-    return data.success;
-}
+// async function validateHuman(
+//     token: string
+// ) {
+//     const secret = process.env.RECAPTCHA_SECRET_KEY;
+//     const response = await fetch(
+//         `https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${token}`,
+//         {
+//             method: "POST",
+//         }
+//     );
+//     const data = await response.json();
+//     return data.success;
+// }
