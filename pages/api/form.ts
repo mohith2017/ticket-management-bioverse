@@ -57,10 +57,10 @@ export default async function ContactApi(
      }
     
       
-    //   const db = getFirestore();
-    //   console.log(db);
+      const db = getFirestore();
+      console.log(db);
 
-    //   const docRef = db.collection('ticket-data').doc(email);
+      const docRef = db.collection('ticket-data').doc(email);
 
 
     //   var issueRef_fetch = "0";
