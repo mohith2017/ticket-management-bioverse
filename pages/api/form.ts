@@ -4,9 +4,9 @@ import { NextApiRequest, NextApiResponse } from "next";
 // import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
 
-// const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
-// const { getFirestore, Timestamp, FieldValue, Filter } = require('firebase-admin/firestore');
-// import firebase from 'firebase-admin';
+const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
+const { getFirestore, Timestamp, FieldValue, Filter } = require('firebase-admin/firestore');
+import firebase from 'firebase-admin';
 
 
 
@@ -49,12 +49,12 @@ export default async function ContactApi(
 
     
 
-    // if (!firebase.apps.length) {
-    //     firebase.initializeApp(firebaseConfig); 
-    //  }
-    //  else{
-    //    firebase.app();
-    //  }
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig); 
+     }
+     else{
+       firebase.app();
+     }
     
       
     //   const db = getFirestore();
