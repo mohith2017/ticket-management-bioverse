@@ -60,11 +60,12 @@ export default async function ContactApi(
       const db = getFirestore();
       console.log(db);
 
-      const docRef = db.collection('ticket-data').doc(email);
+      const docRef = db.collection('ticket-data');
 
 
       var issueRef_fetch = "0";
       const fetch = await docRef.get();
+      console.log(fetch)
       // if(!fetch.exists){
       //   await docRef.set({
       //       name: name,
