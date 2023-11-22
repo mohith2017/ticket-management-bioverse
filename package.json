@@ -2,13 +2,10 @@
   "name": "bioverse-ticket-management",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "node": "18.x"
-  },
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
-    "start": "next start && node server.js",
+    "start": "next start",
     "lint": "next lint",
     "prod_start": "NODE_ENV=production node server.js"
   },
