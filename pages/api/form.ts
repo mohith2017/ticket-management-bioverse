@@ -65,33 +65,33 @@ export default async function ContactApi(
       const db = getFirestore();
       console.log(db);
 
-      const docRef = db.collection('ticket-data');
+      const docRef = db.collection('ticket-data').doc(email);
 
 
       var issueRef_fetch = "0";
       const fetch = await docRef.get();
       console.log(fetch)
-      // if(!fetch.exists){
-      //   await docRef.set({
-      //       name: name,
-      //       issueRef: 1 });
-      //    issueRef_fetch = "1";
-      // }
-      // else{
-      //   issueRef_fetch = fetch.data().issueRef;
-      //   console.log(issueRef_fetch)
-      //   issueRef_fetch = (+issueRef_fetch + 1).toString();
-      //   console.log(issueRef_fetch)
-      //   docRef.update({issueRef: issueRef_fetch});
-      // }
+      if(!fetch.exists){
+        await docRef.set({
+            name: name,
+            issueRef: 1 });
+         issueRef_fetch = "1";
+      }
+      else{
+        issueRef_fetch = fetch.data().issueRef;
+        console.log(issueRef_fetch)
+        issueRef_fetch = (+issueRef_fetch + 1).toString();
+        console.log(issueRef_fetch)
+        docRef.update({issueRef: issueRef_fetch});
+      }
 
 
-    // //   console.log(issueRef);
-    //   const newRef = db.collection('ticket-data').doc(email).collection('tickets').doc(issueRef_fetch);
+    //   console.log(issueRef);
+      const newRef = db.collection('ticket-data').doc(email).collection('tickets').doc(issueRef_fetch);
 
-    //   await newRef.set({
-    //     desc: desc
-    //   });
+      await newRef.set({
+        desc: desc
+      });
 
       
         // const snapshot = await db.collection('ticket-data').doc(email).get();
