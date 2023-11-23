@@ -47,12 +47,11 @@ Green - Resolved
 
 ## Routes
 
-/admin - Admin page
-/home - main page
-/api/admin - Admin Data Fetch API
-/api/form - User Ticketing API
-/api/response - Response Updation API
-/api/status - Status Updation API
+/ - Admin and User pages <br />
+/api/admin - Admin Data Fetch API <br />
+/api/form - User Ticketing API <br />
+/api/response - Response Updation API <br />
+/api/status - Status Updation API <br />
 
 ## App workflow
 
