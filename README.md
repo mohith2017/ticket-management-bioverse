@@ -14,6 +14,7 @@
 - [x] reCAPTCHA with react-google-recaptcha
 - [x] [TypeScript](https://www.typescriptlang.org/)
 - [x] CSS with [Tailwind CSS](https://tailwindcss.com/)
+- [x] Material UI [Material UI](https://mui.com)
 - [x] Icons with [React Icons](https://react-icons.github.io/react-icons/)
 - [x] Cloud firestore real-time storage with [Firebase](https://firebase.com)
 

@@ -1,28 +1,21 @@
-
 import { NextApiRequest, NextApiResponse } from "next";
+// Import the functions you need from the SDKs you need
+// import { initializeApp } from "firebase/app";
+// import { getAnalytics } from "firebase/analytics";
+
 const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
 const { getFirestore, Timestamp, FieldValue, Filter } = require('firebase-admin/firestore');
 import firebase from 'firebase-admin';
 
 
-
-interface Data {
-    name: string;
-    email: string;
-    desc: string;
-    status: string,
-    resp: string,
-    // token: string;
-}
-
-
-export default async function ContactApi(
+export default async function Adminapi(
     req: NextApiRequest,
     res: NextApiResponse,
 ) {
    
-    const { name, email, desc, status, resp }: Data = req.body;
 
+    const result: any[] = [];
+    
     try {
 
         const firebaseConfig = {
@@ -39,6 +32,8 @@ export default async function ContactApi(
           privateKey: process.env.FIREBASE_PRIVATE_KEY
         })
       };
+  
+
     
 
     if (!firebase.apps.length) {
@@ -50,33 +45,23 @@ export default async function ContactApi(
     
       
       const db = getFirestore();
+      // console.log(db);
 
       const docRef = db.collection('ticket-data');
-      const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
-      const newRef = db.collection('ticket-data').doc();
-
-      await newRef.set({
-        name: name,
-        email: email,
-        desc: desc,
-        status: status,
-        resp: resp,
-        timestamp: timestamp,
-      });
-
-      const collectionQuery = db.collection('ticket-data').orderBy('timestamp', 'desc').limit(1);
+      const collectionQuery = db.collection('ticket-data').orderBy('timestamp', 'desc');
       const fetch_side = await collectionQuery.get();
-      console.log(fetch_side.docs[0].data().desc);
+      fetch_side.forEach((doc: { data: () => any; }) =>
+      { 
+        result.push(doc.data());
+      });
+      console.log(result);
 
-         
-        console.log("Issue at time:" + timestamp + "with description:" + desc + "has been submitted!")
-        res.status(200).json({ message: "success" });
+
+        console.log("Tickets in descending order - retrieved!")
+        res.status(200).json({ message: "success" , data: result });
     } catch (err) {
         res.status(500).json({ message: "an error occured" });
         console.log(err);
     }
-
-    
-
-}
+  }

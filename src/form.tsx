@@ -15,7 +15,7 @@ const formSchema = z.object({
   desc: z
     .string()
     .min(10, { message: "Message must be at least 10 characters" })
-    .max(1000, { message: "Message must be less than 1000 characters" }),
+    .max(1000, { message: "Message must be less than 1000 characters" })
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -39,6 +39,14 @@ export default function Form() {
     // recaptchaRef?.current?.reset();
     // @ts-ignore-next-line
     // data["token"] = token || "";
+    
+    data["status"] = "new";
+
+    //@ts-ignore-next-line
+    data["resp"] = "";
+    //@ts-ignore-next-line
+    data["issue"] = "1";
+
     const config = {
       method: "post",
       url: "/api/form",
