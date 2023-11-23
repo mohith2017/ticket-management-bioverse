@@ -7,6 +7,10 @@
 
 ### Screenshots
 
+![Main page](https://postimg.cc/PLq4R6MW)
+
+![Admin page](https://postimg.cc/rR9RcTVK)
+
 ## Tech Stack
 
 - [x] [Next.js](https://nextjs.org/)
@@ -54,6 +58,13 @@ Green - Resolved
 /api/status - Status Updation API <br />
 
 ## App workflow
+
+User => 
+Create Ticket - Hit Submit - Real-time Upload to Firebase on backend
+
+Admin =>
+Real-time view of Tickets with ticket description and previous responses - Update responses through box - Submit through portal - Real-time updation to Firebase
+Update status of tickets - Real-time updation to Firebase - Color coding and heading for status
 
 
 ## How to use
