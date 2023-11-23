@@ -144,7 +144,7 @@ const TicketNew: React.FC<{ ticket: Ticket }> = ({ ticket }) => {
         <ListItemIcon>
           <BugReportIcon sx={{ backgroundColor: getIconColor(ticket.status) }}/>
         </ListItemIcon>
-        <ListItemText primary="New" />
+        <ListItemText primary={ticket.status} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
