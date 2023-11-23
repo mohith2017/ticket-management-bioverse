@@ -29,6 +29,8 @@ End user:
 - Toggle between Admin and End user portal
 - Logging of successfully completing submission
 
+IMP NOTE: Response has to be >=10 characters
+
 Admin
 - List view of existing tickets - in order of most recently created ticket to least
 - Respond to the user's ticket in real-time
