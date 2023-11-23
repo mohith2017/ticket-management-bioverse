@@ -7,9 +7,9 @@
 
 ### Screenshots
 
-![Main page](https://postimg.cc/PLq4R6MW)
+![Main page](https://i.postimg.cc/SK6vj32v/Screen-Shot-2023-11-23-at-7-51-11-AM.png)
 
-![Admin page](https://postimg.cc/rR9RcTVK)
+![Admin page](https://i.postimg.cc/nry44VNY/Screen-Shot-2023-11-23-at-7-51-40-AM.png)
 
 ## Tech Stack
 
